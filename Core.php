@@ -27,17 +27,6 @@ class System {
         return $conn;
     }
 
-    /***   Anti SQL Injection - Chỉ nhận dạng Số   ***/
-    public function anti_sql($number) 
-    {
-        $pattern = '/[^a-z0-9]/';
-        $id = preg_match($pattern, $number); // Outputs 1
-        return $id; 
-        // type boolean.
-        // 1 = true là có tồn tài ký tự khác số .
-        // 0 = false là không tồn tại ký tự khác số.
-    }
-
     /***   đếm tất cả người dùng hệ thống   ***/
     public function count_user() {
         $result = mysqli_query($this->connect(), "SELECT `id` FROM `users` WHERE `status` = 1");
