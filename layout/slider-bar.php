@@ -23,24 +23,18 @@
           </li>
           <li class="sidebar-list">
             <a class="sidebar-link sidebar-title" href="#">
-              <i data-feather="package"></i>
-              <span>Quản lý</span>
+              <i data-feather="bar-chart-2"></i>
+              <span>Sản phẩm</span>
             </a>
             <ul class="sidebar-submenu">
               <li><a href="product-add.php">Thêm sản phẩm</a></li>
-              <li><a href="product.php">Sản phẩm</a></li>
-              <li><a href="orders-list.php">Đơn hàng</a></li>
+              <li><a href="product-list.php">Quản lý sản phẩm</a></li>
             </ul>
           </li>
           <li class="sidebar-list">
-            <a class="sidebar-link sidebar-title" href="#">
-              <i data-feather="bar-chart-2"></i>
-              <span>Danh sách</span>
-            </a>
-            <ul class="sidebar-submenu">
-              <li><a href="product-list.php">Sản phẩm</a></li>
-              <li><a href="orders-list.php">Đơn hàng</a></li>
-            </ul>
+            <a class="sidebar-link sidebar-title link-nav" href="orders-list.php">
+              <i data-feather="package"></i>
+              <span>Đơn hàng</span></a>
           </li>
           <li class="sidebar-list">
             <a class="sidebar-link sidebar-title link-nav" href="settings.php">

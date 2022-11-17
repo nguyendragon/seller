@@ -8,6 +8,10 @@
   <?php
     $dragon = new System;
     $list_cate = $dragon->listCategory();
+    if (!isset($_GET['id_p']) || $_GET['id_p'] == "") return header("location: ".BASE_URL."/product-list.php");
+    $id = $_GET['id_p'];
+    $data = $dragon->productById($id);
+    if (empty($data['name_product'])) return header("location: ".BASE_URL."/product-list.php");
   ?>
   <style>
     .preview-img {
@@ -40,13 +44,13 @@
           <div class="page-title">
             <div class="row">
               <div class="col-12 col-sm-6">
-                <h3>Thêm sản phẩm</h3>
+                <h3>Cập nhật sản phẩm</h3>
               </div>
               <div class="col-12 col-sm-6">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
                   <li class="breadcrumb-item">Thống kê</li>
-                  <li class="breadcrumb-item active"> Thêm sản phẩm</li>
+                  <li class="breadcrumb-item active"> Cập nhật sản phẩm</li>
                 </ol>
               </div>
             </div>
@@ -63,17 +67,17 @@
                     <div class="row g-3 mb-4">
                       <div class="col-md-4">
                         <label class="form-label" for="name_product">Tên sản phẩm</label>
-                        <input class="form-control" id="name_product" type="text" value="" placeholder="Nhập tên sản phẩm" required="">
+                        <input class="form-control" id="name_product" type="text" value="<?=$data['name_product']?>" placeholder="Nhập tên sản phẩm" required="">
                         <div class="invalid-feedback">Vui lòng nhập tên sản phẩm.</div>
                       </div>
                       <div class="col-md-4">
                         <label class="form-label" for="price_product">Giá sản phẩm</label>
-                        <input class="form-control" id="price_product" type="text" value="" placeholder="Nhập giá sản phẩm" required="">
+                        <input class="form-control" id="price_product" type="text" value="<?=$data['price']?>" placeholder="Nhập giá sản phẩm" required="">
                         <div class="invalid-feedback">Vui lòng nhập giá sản phẩm.</div>
                       </div>
                       <div class="col-md-4">
                         <label class="form-label" for="sale_product">Giảm giá</label>
-                        <input class="form-control" id="sale_product" type="text" value="0" placeholder="Giảm giá" required="">
+                        <input class="form-control" id="sale_product" type="text" value="<?=$data['sale']?>" placeholder="Giảm giá" required="">
                         <div class="invalid-feedback">Vui lòng nhập giảm giá.</div>
                       </div>
                     </div>
@@ -88,7 +92,9 @@
                         <select class="form-select" id="id_category" required="">
                           <option value="">----- Chọn thể loại -----</option>
                           <?php foreach ($list_cate as $key => $value) : ?>
-                            <option value="<?= $value['id_cate'] ?>"><?= $value['name_category'] ?></option>
+                            <option 
+                            <?=$data['id_cate'] == $value['id_cate'] ? 'selected' : ''?>
+                            value="<?= $value['id_cate'] ?>"><?= $value['name_category'] ?></option>
                           <?php endforeach ?>
                         </select>
                         <div class="invalid-feedback">Vui lòng chọn một trạng thái hợp lệ.</div>
@@ -101,14 +107,13 @@
                     </div>
                     <div class="row g-3 mb-4">
                       <div class="col-md-12 preview-img">
-                        <p id="image-show1">HÌNH ẢNH ĐƯỢC TẢI LÊN</p>
-                        <img id="image-show" width="162px" height="162px" src="" title="" style="display: none;">
+                        <img id="image-show" width="162px" height="162px" src="<?=BASE_IMG.$data['image']?>">
                       </div>
                     </div>
                     <div class="row g-3 mb-4">
                       <div class="col-md-12">
                         <div id="editor">
-                          Nhập thông tin sản phẩm
+                          <?=trim($data['detail'])?>
                         </div>
                       </div>
                     </div>
@@ -171,8 +176,6 @@
       if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {
-          $('#image-show1').fadeOut(0);
-          $('#image-show').fadeIn(0);
           $("#image-show").attr("src", e.target.result).width(162)
             .height(162);
         };
@@ -189,14 +192,15 @@
       let id_category = $('#id_category').val().trim();
       let sale_product = $('#sale_product').val().trim();
       const editorData = editor.getData();
-      if (files.length > 0 && name_product != "" && price_product != "" && id_category != "" && sale_product != "") {
+      if (name_product != "" && price_product != "" && id_category != "" && sale_product != "") {
         fd.append('file', files[0]);
         fd.append('name_product', name_product);
         fd.append('price_product', price_product);
         fd.append('id_category', id_category);
         fd.append('sale_product', sale_product);
         fd.append('content', editorData);
-        fd.append('type', 'add');
+        fd.append('type', 'update');
+        fd.append('id_p', '<?=$id?>');
         $.ajax({
           url: 'models/product.php',
           type: 'POST',

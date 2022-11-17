@@ -64,10 +64,23 @@ class System {
         }
     }
 
-    public function restaurantInfo() {
+    public function listProduct() {
         $user = $this->userInfo();
         $id_u = $user['id_user'];
         $result = mysqli_query($this->connect(), "SELECT * FROM `product` WHERE `id_restaurant`='".$id_u."' ORDER BY id_product  DESC");
+        return $result;
+    }
+
+    public function productById($id) {
+        $id_res = $this->restaurant()['id_restaurant'];
+        $result = mysqli_query($this->connect(), "SELECT * FROM `product` WHERE `id_product`='".$id."' AND `id_restaurant`='".$id_res."'")->fetch_array();
+        return $result;
+    }
+
+    public function restaurant() {
+        $user = $this->userInfo();
+        $id_u = $user['id_user'];
+        $result = mysqli_query($this->connect(), "SELECT * FROM `restaurants` WHERE `id_user`='".$id_u."'")->fetch_array();
         return $result;
     }
 
@@ -97,6 +110,14 @@ class System {
     {
         $time = date("d M Y, H:i a");
         return $time;
+    }
+
+    public function res_json($status, $message){
+        $data = array(
+            'status' => "$status",
+            'message' => "$message",
+        );
+        return $data;
     }
 
     public function status_user($username, $password)
