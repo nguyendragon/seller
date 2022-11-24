@@ -32,9 +32,14 @@
             </ul>
           </li>
           <li class="sidebar-list">
-            <a class="sidebar-link sidebar-title link-nav" href="orders-list.php">
+            <a class="sidebar-link sidebar-title" href="#">
               <i data-feather="package"></i>
-              <span>Đơn hàng</span></a>
+              <span>Đơn hàng</span>
+            </a>
+            <ul class="sidebar-submenu">
+              <li><a href="product-add.php">Đơn hàng chờ duyệt</a></li>
+              <li><a href="orders-list.php">Quản lý đơn hàng</a></li>
+            </ul>
           </li>
           <li class="sidebar-list">
             <a class="sidebar-link sidebar-title link-nav" href="settings.php">

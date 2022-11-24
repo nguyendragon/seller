@@ -53,6 +53,11 @@ $restaurant = $dragon->listProduct();
         </div>
         <!-- Container-fluid starts-->
         <div class="container-fluid list-products">
+          <div class="text-end mb-4">
+            <a href="<?=BASE_URL.'/product-add.php'?>" class="btn btn-primary">
+              <span>+ Thêm sản phẩm mới</span>
+            </a>
+          </div>
           <div class="row">
             <!-- Individual column searching (text inputs) Starts-->
             <div class="col-sm-12">

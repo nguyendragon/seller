@@ -32,6 +32,11 @@
           </div>
           <!-- Container-fluid starts-->
           <div class="container-fluid">
+            <!-- <div class="text-end mb-2 mr-2">
+              <a href="<?=BASE_URL.'/product-add.php'?>" class="btn btn-primary">
+                <span>Đơn hàng chờ duyệt</span>
+              </a>
+            </div> -->
             <div class="row">
               <div class="col-sm-12">
                 <div class="card">

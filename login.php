@@ -6,7 +6,7 @@
     $check = '';
     if (isset($_POST['seller_submit'])) {
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $password = md5($_POST['password']);
         $check = $dragon->login($email, $password);
         if (!$check) $msg = 'Tài khoản hoặt mật khẩu không chính xác !';
         if ($check) $msg = 'Đăng nhập thành công !';

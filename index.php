@@ -48,11 +48,12 @@
                                         <div class="media-body">
                                             <div class="greeting-user">
                                                 <h1>Xin chào, Vina Con</h1>
-                                                <p>Chào mừng bạn trở lại, bảng điều khiển của bạn đã sẵn sàng!</p><a class="btn btn-outline-white_color" href="blog-single.html">Bắt đầu<i class="icon-arrow-right"> </i></a>
+                                                <p>Chào mừng bạn trở lại, bảng điều khiển của bạn đã sẵn sàng!</p>
+                                                <a class="btn btn-outline-white_color" href="#">Bắt đầu<i class="icon-arrow-right"> </i></a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="cartoon-img"><img class="img-fluid" src="https://admin.pixelstrap.com/zeta/assets/images/images.svg" alt=""></div>
+                                    <div class="cartoon-img"><img class="img-fluid" src="<?=BASE_URL?>/assets/images/images.svg" alt=""></div>
                                 </div>
                             </div>
                         </div>
